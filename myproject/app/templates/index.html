@@ -1,0 +1,22 @@
+{% load i18n %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+</head>
+<body>
+  <p>{{ page }}, {% trans 'let take a look on my website' %}</p>
+  <p><a onclick="alert(gettext('let take a look on my website'))" href="#">{% trans 'Say hello' %}</a></p>
+
+  {% get_available_languages as languages %}
+
+  {% trans "View this page in:" %}
+  {% for lang_code, lang_name in languages %}
+      {% language lang_code %}
+      <a href="{% url 'home'  %}">{{ lang_name }}</a>
+      {% endlanguage %}
+  {% endfor %}
+</body>
+</html>
